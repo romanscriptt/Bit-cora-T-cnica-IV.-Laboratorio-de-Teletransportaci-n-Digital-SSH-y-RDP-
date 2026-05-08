@@ -6,11 +6,6 @@
 **Curso:** 1º DAM — Centro FP Superior Cámara de Comercio de Sevilla  
 **Profesor:** Willman Acosta Lugo  
 **Resultado de Aprendizaje:** RA6  
-**Criterios evaluados:**
-- `d)` Se ha accedido a los servidores utilizando técnicas de conexión remota
-- `f)` Al configurar el hardening y las llaves
-- `e)` Mediante su reflexión sobre la protección del sistema
-
 ---
 
 ##  Descripción del laboratorio
@@ -99,6 +94,7 @@ Creating lab_rdp_servidor ... done
 ```bash
 docker ps
 ```
+<img width="1080" height="610" alt="image" src="https://github.com/user-attachments/assets/bfc20b11-c67a-434c-9925-820ac3bdf0c8" />
 
 **Salida esperada:**
 
@@ -128,6 +124,7 @@ ssh alumno@localhost -p 2222
 Me pide contraseña. Introduzco: `sistemas_informaticos`
 
 **Salida esperada:**
+<img width="1096" height="207" alt="image" src="https://github.com/user-attachments/assets/f1a0d564-9066-40cc-bc08-996ec93aaefa" />
 
 ```
 The authenticity of host '[localhost]:2222' can't be established.
@@ -162,6 +159,7 @@ Enter same passphrase again: [Enter]
 ```
 
 **Salida esperada:**
+<img width="814" height="167" alt="image" src="https://github.com/user-attachments/assets/e7f6a01f-1d63-489e-940f-4561cba129cb" />
 
 ```
 Your identification has been saved in /home/usuario/.ssh/id_ed25519
@@ -174,6 +172,7 @@ The key's randomart image is:
 ...
 +----[SHA256]-----+
 ```
+<img width="640" height="420" alt="image" src="https://github.com/user-attachments/assets/b0a2396f-4cd9-49a2-a34a-2f771dceb802" />
 
 **Esto genera dos archivos:**
 
@@ -197,6 +196,7 @@ ssh-copy-id -p 2222 alumno@localhost
 Me pide la contraseña por última vez: `sistemas_informaticos`
 
 **Salida esperada:**
+<img width="1263" height="37" alt="image" src="https://github.com/user-attachments/assets/caf27f2f-dcf5-46fc-b846-144c9168f7cf" />
 
 ```
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/usuario/.ssh/id_ed25519.pub"
@@ -313,48 +313,11 @@ cat ~/Desktop/PRUEBA_LOGRADA.txt
 ```
 
 **Salida:**
+<img width="1915" height="910" alt="image" src="https://github.com/user-attachments/assets/c864dfa0-5765-4746-bd4d-baef1b0ebb4c" />
 
 ```
 Práctica completada. Álvaro López de San Román - DAM 1º 2024/2025
 ```
-
-
-
----
-
-##  Tabla de puertos y protocolos
-
-| Puerto | Protocolo | Servicio |
-|--------|-----------|----------|
-| `22` / `2222` | SSH | Acceso seguro por consola |
-| `3000` | HTTP | Guacamole (escritorio en navegador) |
-| `3389` | RDP | Escritorio Remoto (Microsoft) |
-
->  **¿Por qué da error conectar un cliente RDP al puerto 3000?**  
-> Cada protocolo tiene su propio "idioma de paquetes". Si un cliente RDP intenta hablar con el puerto 3000, el servidor le responde en HTTP (texto/HTML) y el cliente RDP no entiende esas respuestas → **error de protocolo**. Es como intentar hablar en japonés con alguien que solo entiende inglés.
-
----
-
-##  Reflexión Final — ¿Por qué SSH domina en producción frente a RDP?
-
-SSH es el estándar absoluto en administración de servidores de producción. Estas son las razones:
-
-**1. Consumo de recursos mínimo**  
-SSH transmite únicamente texto y comandos. RDP transmite píxeles de pantalla comprimidos, lo que dispara el uso de CPU, RAM y ancho de banda sin aportar ningún valor extra en un servidor que no tiene interfaz gráfica.
-
-**2. Seguridad criptográfica superior**  
-La autenticación por clave pública de SSH es matemáticamente más robusta que cualquier contraseña. Además, se puede deshabilitar completamente el acceso por contraseña, eliminando toda posibilidad de ataques de fuerza bruta.
-
-**3. Automatización nativa**  
-SSH es la base de herramientas de automatización como **Ansible**, **rsync**, **scp** o **Git**. Con un servidor SSH puedes desplegar aplicaciones, sincronizar ficheros y gestionar cientos de máquinas desde un script. Con RDP, nada de esto es posible de forma nativa.
-
-**4. Multiplataforma y universal**  
-Todo sistema operativo moderno (Linux, macOS, Windows 10+) incluye un cliente SSH de serie. RDP es un protocolo propietario de Microsoft con soporte limitado y a veces de pago en entornos no-Windows.
-
-**5. Menor superficie de ataque**  
-Un servidor sin entorno gráfico instalado es un servidor con menos software, menos dependencias, menos vulnerabilidades potenciales y menos trabajo de mantenimiento. Menos código = menos riesgo.
-
-**Conclusión:** RDP es útil cuando necesitas ver, hacer clic y usar aplicaciones gráficas. SSH es la herramienta real del administrador de sistemas: ligera, segura, automatizable y universal.
 
 ---
 
